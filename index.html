@@ -42,10 +42,10 @@
             padding: 15px 0 5px;
         }
 
-        /* TÍTULO PRINCIPAL - AJUSTADO PARA MOBILE */
+        /* TÍTULO PRINCIPAL - CORRIGIDO */
         .titulo-boteco {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2.2rem, 15vw, 5.5rem);
+            font-size: clamp(2.5rem, 12vw, 5.5rem);
             color: var(--amarelo-quente);
             text-transform: uppercase;
             line-height: 1.1;
@@ -55,12 +55,35 @@
             max-width: 100%;
         }
 
-        /* Para telas muito pequenas, quebra em duas linhas */
+        /* Container específico para o nome CHRISTIAN */
+        .nome-christian {
+            display: inline-block;
+            white-space: nowrap; /* Impede quebra no meio da palavra */
+            font-size: inherit;
+        }
+
+        /* Para telas muito pequenas, permite quebrar antes de CHRISTIAN */
         @media (max-width: 380px) {
             .titulo-boteco {
-                font-size: 2rem;
-                letter-spacing: 2px;
+                font-size: 2.2rem;
             }
+            
+            .nome-christian {
+                white-space: normal; /* Permite quebra em telas muito pequenas */
+                display: block;
+            }
+            
+            /* Garante que CHRISTIAN fique inteiro */
+            .nome-christian span {
+                display: inline-block;
+                white-space: nowrap;
+            }
+        }
+
+        /* Ajuste específico para o nome CHRISTIAN não quebrar */
+        .christian-name {
+            display: inline-block;
+            white-space: nowrap;
         }
 
         .subtitulo {
@@ -76,30 +99,32 @@
             backdrop-filter: blur(5px);
         }
 
-        /* INDICADOR DE ROLAGEM - COMPACTO */
+        /* INDICADOR DE ROLAGEM - MAIS DESTAQUE */
         .scroll-indicator {
             text-align: center;
-            margin: 10px auto 15px;
-            padding: 8px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 40px;
-            border: 1px solid var(--dourado-cerveja);
-            max-width: 280px;
-            animation: flutuar 2s ease-in-out infinite;
+            margin: 15px auto 20px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--marrom), var(--marrom-escuro));
+            border-radius: 50px;
+            border: 2px solid var(--amarelo-quente);
+            max-width: 300px;
+            animation: pulsar-suave 2s ease-in-out infinite;
             cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 179, 71, 0.3);
         }
 
         .scroll-indicator p {
-            color: var(--dourado-cerveja);
-            font-size: 0.9rem;
-            font-weight: 600;
+            color: var(--amarelo-quente);
+            font-size: 1rem;
+            font-weight: 800;
             letter-spacing: 1px;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         .scroll-indicator i {
-            color: var(--amarelo-quente);
-            font-size: 1.5rem;
+            color: var(--dourado-cerveja);
+            font-size: 1.8rem;
             animation: seta-pulando 1.5s infinite;
         }
 
@@ -278,7 +303,7 @@
             animation: spin 1s linear infinite;
         }
 
-        /* PÁGINA DE CONFIRMAÇÃO - MOBILE */
+        /* PÁGINA DE CONFIRMAÇÃO */
         #pagina-confirmacao {
             padding: 15px 0;
         }
@@ -315,6 +340,8 @@
             max-width: 250px;
             margin: 0 auto;
             display: block;
+            cursor: pointer;
+            text-align: center;
         }
 
         .map-container {
@@ -340,6 +367,7 @@
             width: 100%;
             max-width: 250px;
             margin: 20px auto 0;
+            cursor: pointer;
         }
 
         /* FOOTER */
@@ -367,6 +395,11 @@
             50% { opacity: 0.6; }
         }
 
+        @keyframes pulsar-suave {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -386,23 +419,6 @@
             .info-item {
                 width: 280px;
             }
-
-            .scroll-indicator {
-                max-width: 350px;
-                padding: 12px;
-            }
-
-            .scroll-indicator p {
-                font-size: 1.1rem;
-            }
-
-            .scroll-indicator i {
-                font-size: 2rem;
-            }
-
-            .pix-key-box {
-                font-size: 1.5rem;
-            }
         }
 
         /* UTILITÁRIOS */
@@ -417,10 +433,15 @@
     <div id="pagina-principal">
         <div class="container">
             <header>
-                <h1 class="titulo-boteco">BOTECO<br>DO CHRISTIAN</h1>
+                <!-- TÍTULO CORRIGIDO - Garantindo que CHRISTIAN não quebre -->
+                <h1 class="titulo-boteco">
+                    BOTECO DO<br>
+                    <span class="christian-name">CHRISTIAN</span>
+                </h1>
+                
                 <div class="subtitulo">⏤ VAMOS CELEBRAR ⏤</div>
                 
-                <!-- Indicador de rolagem -->
+                <!-- Indicador de rolagem - MAIS VISÍVEL -->
                 <div class="scroll-indicator" onclick="document.getElementById('confirmacao').scrollIntoView({behavior: 'smooth'})">
                     <p>⬇️ CONFIRMAR PRESENÇA ⬇️</p>
                     <i class="fas fa-chevron-down"></i>
@@ -508,11 +529,11 @@
             </div>
 
             <!-- Conteúdo PIX -->
-            <div id="conteudo-personalizado" class="pix-card">
-                <h2 style="font-size: 1.8rem; margin-bottom: 10px;">💰 PIX</h2>
+            <div class="pix-card">
+                <h2 style="font-size: 1.8rem; margin-bottom: 10px;">💰 PRESENTE VIA PIX</h2>
                 <p class="text-center">Chave (CPF):</p>
                 <div class="pix-key-box" id="pix-key">82448604304</div>
-                <p class="text-center" style="color: var(--amarelo-quente); font-size: 1.3rem; font-weight: 600;">R$ 150,00</p>
+                <p class="text-center" style="color: var(--amarelo-quente); font-size: 1.5rem; font-weight: 800; margin: 10px 0;">R$ 150,00</p>
                 <button class="copy-btn" onclick="copiarPix()">
                     <i class="fas fa-copy"></i> Copiar chave
                 </button>
@@ -521,8 +542,8 @@
 
             <!-- Localização -->
             <div class="pix-card">
-                <h2 style="font-size: 1.8rem;">📍 LOCAL</h2>
-                <p class="text-center">Rua Luis Eduardo, 35 - Vila Luizão</p>
+                <h2 style="font-size: 1.8rem;">📍 LOCAL DA FESTA</h2>
+                <p class="text-center" style="font-size: 1.1rem; margin-bottom: 10px;">Rua Luis Eduardo, 35 - Vila Luizão</p>
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15944.19849624591!2d-44.21188478432636!3d-2.490524572962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7f6924c5008143b%3A0x4be1788202cdb8a!2sR.%20Lu%C3%ADs%20Eduardo%20-%20Turu%2C%20S%C3%A3o%20Lu%C3%ADs%20-%20MA%2C%2065066-620!5e0!3m2!1spt-BR!2sbr!4v1755606599801!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
                 </div>
@@ -532,7 +553,7 @@
             </div>
 
             <button class="back-btn" onclick="voltarInicio()">
-                <i class="fas fa-arrow-left"></i> Voltar
+                <i class="fas fa-arrow-left"></i> Voltar ao início
             </button>
         </div>
     </div>
@@ -551,6 +572,8 @@
         function copiarPix() {
             navigator.clipboard.writeText('82448604304').then(() => {
                 alert('✅ Chave PIX copiada! Valor: R$ 150,00');
+            }).catch(() => {
+                alert('❌ Erro ao copiar. Tente novamente!');
             });
         }
 
