@@ -7,271 +7,200 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --marrom-escuro: #2c1810;
-            --marrom: #4a2c1a;
-            --marrom-claro: #8b5a2b;
-            --dourado-cerveja: #d4a76a;
-            --bege: #fff3e0;
-            --creme: #f5e6d3;
-            --preto: #1a0f0a;
-            --branco: #ffffff;
-            --amarelo-quente: #ffb347;
-        }
-
+        /* RESET E VARIÁVEIS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --marrom-escuro: #2c1810;
+            --marrom: #4a2c1a;
+            --dourado-cerveja: #d4a76a;
+            --bege: #fff3e0;
+            --amarelo-quente: #ffb347;
+        }
+
         body {
             background: linear-gradient(135deg, var(--marrom-escuro) 0%, var(--marrom) 100%);
             color: var(--bege);
-            overflow-x: hidden;
-            min-height: 100vh;
             font-family: 'Archivo', sans-serif;
+            min-height: 100vh;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 12px;
         }
 
-        /* Efeitos de fundo de boteco */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(210, 180, 140, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.05) 0%, transparent 25%),
-                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 4px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
+        /* ===== HEADER MOBILE FIRST ===== */
         header {
             text-align: center;
-            padding: 20px 0 10px;
-            position: relative;
+            padding: 15px 0 5px;
         }
 
+        /* TÍTULO PRINCIPAL - AJUSTADO PARA MOBILE */
         .titulo-boteco {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2.5rem, 12vw, 5.5rem);
+            font-size: clamp(2.2rem, 15vw, 5.5rem);
             color: var(--amarelo-quente);
             text-transform: uppercase;
-            letter-spacing: clamp(2px, 2vw, 8px);
-            text-shadow: 
-                3px 3px 0 var(--marrom-escuro),
-                6px 6px 0 rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
-            animation: balancar 3s ease-in-out infinite;
-            transform-origin: center;
-            line-height: 1.2;
+            line-height: 1.1;
+            text-shadow: 3px 3px 0 var(--marrom-escuro);
+            margin-bottom: 8px;
             word-break: break-word;
+            max-width: 100%;
+        }
+
+        /* Para telas muito pequenas, quebra em duas linhas */
+        @media (max-width: 380px) {
+            .titulo-boteco {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
         }
 
         .subtitulo {
-            font-size: clamp(1.2rem, 5vw, 2rem);
+            font-size: clamp(1rem, 4vw, 2rem);
             color: var(--dourado-cerveja);
-            font-weight: 400;
-            letter-spacing: clamp(2px, 1.5vw, 4px);
-            text-transform: uppercase;
             background: rgba(0, 0, 0, 0.3);
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
+            padding: 6px 15px;
+            border-radius: 30px;
             border: 2px solid var(--dourado-cerveja);
-            margin: 15px auto 10px;
+            margin: 10px auto;
             max-width: 90%;
+            backdrop-filter: blur(5px);
         }
 
-        /* Container da imagem do Christian */
-        .chris-image-container {
-            position: relative;
-            width: 100%;
-            max-width: min(500px, 90%);
-            margin: 20px auto;
+        /* INDICADOR DE ROLAGEM - COMPACTO */
+        .scroll-indicator {
+            text-align: center;
+            margin: 10px auto 15px;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 40px;
+            border: 1px solid var(--dourado-cerveja);
+            max-width: 280px;
+            animation: flutuar 2s ease-in-out infinite;
             cursor: pointer;
+        }
+
+        .scroll-indicator p {
+            color: var(--dourado-cerveja);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .scroll-indicator i {
+            color: var(--amarelo-quente);
+            font-size: 1.5rem;
+            animation: seta-pulando 1.5s infinite;
+        }
+
+        /* IMAGEM */
+        .chris-image-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 15px auto;
+            position: relative;
         }
 
         .chris-image {
             width: 100%;
             height: auto;
-            border-radius: 30px;
-            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
-            transition: all 0.3s ease;
+            border-radius: 25px;
             border: 4px solid var(--dourado-cerveja);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        /* Efeito de brilho ao redor da imagem */
         .chris-image-container::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 40px;
-            background: linear-gradient(135deg, var(--amarelo-quente), var(--dourado-cerveja), transparent);
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--amarelo-quente), transparent);
             opacity: 0.3;
-            filter: blur(10px);
+            filter: blur(8px);
             z-index: -1;
-            animation: pulsar-brilho 3s ease-in-out infinite;
+            animation: pulsar 3s infinite;
         }
 
-        /* Efeito de luzes de boteco piscando - ajustado pra mobile */
-        .pisca-pisca {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: none; /* Escondido em mobile pra não poluir */
-        }
-
-        @media (min-width: 769px) {
-            .pisca-pisca {
-                display: block;
-            }
-            
-            .pisca-pisca span {
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: var(--amarelo-quente);
-                box-shadow: 0 0 15px var(--amarelo-quente);
-                animation: piscar 1.5s infinite;
-            }
-
-            .pisca-pisca span:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-            .pisca-pisca span:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
-            .pisca-pisca span:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
-            .pisca-pisca span:nth-child(4) { bottom: 15%; right: 25%; animation-delay: 1.5s; }
-        }
-
-        /* Indicador de rolagem - PERTO DO VAMOS CELEBRAR */
-        .scroll-indicator {
-            text-align: center;
-            margin: 15px auto 25px;
-            animation: flutuar 2s ease-in-out infinite;
-            cursor: pointer;
-            max-width: 300px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--dourado-cerveja);
-        }
-
-        .scroll-indicator p {
-            color: var(--dourado-cerveja);
-            font-size: clamp(0.9rem, 4vw, 1.2rem);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .scroll-indicator i {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            color: var(--amarelo-quente);
-            animation: seta-pulando 1.5s ease-in-out infinite;
-        }
-
+        /* SEÇÕES */
         section {
             background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             border-radius: 25px;
-            padding: clamp(20px, 5vw, 40px);
-            margin: 25px 0;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            padding: 20px 18px;
+            margin: 20px 0;
             border: 2px solid var(--dourado-cerveja);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Efeito de mancha de cerveja - ajustado pra mobile */
-        section::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            right: -30px;
-            width: min(150px, 30vw);
-            height: min(150px, 30vw);
-            background: radial-gradient(circle, rgba(210, 180, 140, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
         }
 
         h2 {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             color: var(--amarelo-quente);
-            margin-bottom: 20px;
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 0 var(--marrom-escuro);
             word-break: break-word;
         }
 
         h2 i {
-            margin: 0 8px;
-            color: var(--dourado-cerveja);
             font-size: clamp(1.2rem, 4vw, 2rem);
+            margin: 0 5px;
+            color: var(--dourado-cerveja);
         }
 
+        /* CARDS DE INFORMAÇÃO */
         .info-card {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-            gap: 15px;
+            gap: 12px;
+            margin: 15px 0;
         }
 
         .info-item {
-            text-align: center;
-            padding: 20px 15px;
             width: 100%;
-            max-width: 280px;
+            max-width: 300px;
+            text-align: center;
+            padding: 18px 12px;
             background: linear-gradient(135deg, var(--marrom), var(--marrom-escuro));
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
             border: 2px solid var(--dourado-cerveja);
-            transition: all 0.3s ease;
         }
 
         .info-item i {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: 2.2rem;
             color: var(--amarelo-quente);
-            margin-bottom: 10px;
-        }
-
-        .info-item h3 {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            color: var(--dourado-cerveja);
             margin-bottom: 8px;
         }
 
+        .info-item h3 {
+            color: var(--dourado-cerveja);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
         .info-item p {
-            font-size: clamp(1rem, 3.5vw, 1.3rem);
-            color: var(--bege);
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
+        /* FORMULÁRIO */
         form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
         .form-group {
@@ -280,77 +209,59 @@
         }
 
         label {
-            margin-bottom: 5px;
-            font-weight: 600;
             color: var(--dourado-cerveja);
-            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1rem;
         }
 
         input, select {
-            padding: 15px;
             background: var(--marrom-escuro);
             border: 2px solid var(--dourado-cerveja);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 14px;
             color: var(--bege);
+            font-size: 1rem;
             width: 100%;
             -webkit-appearance: none;
-            appearance: none;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--amarelo-quente);
-            box-shadow: 0 0 15px var(--amarelo-quente);
-            background: var(--marrom);
+            box-shadow: 0 0 10px var(--amarelo-quente);
         }
 
         select {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4a76a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4a76a' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
             background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 16px;
-            padding-right: 45px;
-        }
-
-        select option {
-            background: var(--marrom-escuro);
-            color: var(--bege);
+            background-position: right 12px center;
+            padding-right: 40px;
         }
 
         button {
             background: linear-gradient(135deg, var(--amarelo-quente), var(--dourado-cerveja));
             color: var(--marrom-escuro);
             border: none;
-            padding: 18px;
             border-radius: 15px;
-            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            padding: 16px;
+            font-size: 1.3rem;
             font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 179, 71, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 2px;
             font-family: 'Archivo Black', sans-serif;
-            width: 100%;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 179, 71, 0.5);
-            background: linear-gradient(135deg, var(--dourado-cerveja), var(--amarelo-quente));
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 179, 71, 0.3);
+            transition: all 0.3s;
         }
 
         button:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
+        /* LOADING */
         .loading {
             display: none;
             text-align: center;
-            margin: 15px 0;
         }
 
         .loading.mostrar {
@@ -358,152 +269,158 @@
         }
 
         .loading-spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border: 3px solid var(--marrom);
-            border-radius: 50%;
             border-top-color: var(--amarelo-quente);
-            animation: spin 1s ease-in-out infinite;
+            border-radius: 50%;
+            margin: 10px auto;
+            animation: spin 1s linear infinite;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px 0 20px;
-            color: var(--dourado-cerveja);
-            font-size: clamp(0.9rem, 3vw, 1rem);
-            border-top: 2px solid var(--dourado-cerveja);
-            margin-top: 30px;
+        /* PÁGINA DE CONFIRMAÇÃO - MOBILE */
+        #pagina-confirmacao {
+            padding: 15px 0;
         }
 
-        /* Estilos específicos para a página de confirmação em mobile */
-        #pagina-confirmacao .container {
-            padding: 20px 15px;
-        }
-
-        #pagina-confirmacao h1 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-        }
-
-        #pagina-confirmacao .map-container {
-            height: 300px;
-        }
-
-        #pagina-confirmacao iframe {
-            height: 300px;
-        }
-
-        .pix-container {
-            max-width: 100%;
-            overflow-x: auto;
-            padding: 10px 0;
+        .pix-card {
+            background: rgba(44, 24, 16, 0.95);
+            border-radius: 25px;
+            padding: 20px;
+            border: 2px solid var(--amarelo-quente);
+            margin-bottom: 20px;
         }
 
         .pix-key-box {
             background: var(--marrom-escuro);
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 15px;
             border: 2px solid var(--amarelo-quente);
             font-family: monospace;
-            font-size: clamp(1rem, 4vw, 1.3rem);
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            text-align: center;
             color: var(--amarelo-quente);
             word-break: break-all;
-            text-align: center;
+            margin: 15px 0;
         }
 
-        .copy-btn-mobile {
+        .copy-btn {
+            background: linear-gradient(135deg, var(--amarelo-quente), var(--dourado-cerveja));
+            color: var(--marrom-escuro);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
             width: 100%;
-            margin-top: 10px;
+            max-width: 250px;
+            margin: 0 auto;
+            display: block;
         }
 
-        @keyframes balancar {
-            0%, 100% { transform: rotate(-0.5deg); }
-            50% { transform: rotate(0.5deg); }
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid var(--amarelo-quente);
+            height: 250px;
+            margin: 15px 0;
         }
 
-        @keyframes pulsar-brilho {
-            0%, 100% { opacity: 0.3; filter: blur(8px); }
-            50% { opacity: 0.5; filter: blur(12px); }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
         }
 
-        @keyframes piscar {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+        .back-btn {
+            background: transparent;
+            border: 2px solid var(--amarelo-quente);
+            color: var(--amarelo-quente);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            width: 100%;
+            max-width: 250px;
+            margin: 20px auto 0;
         }
 
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px 0 10px;
+            border-top: 2px solid var(--dourado-cerveja);
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* ANIMAÇÕES */
         @keyframes flutuar {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
         }
 
         @keyframes seta-pulando {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
             50% { transform: translateY(8px); opacity: 1; }
+        }
+
+        @keyframes pulsar {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Ajustes específicos para mobile */
-        @media (max-width: 480px) {
+        /* TABLET E DESKTOP */
+        @media (min-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 20px;
             }
-            
+
+            .info-card {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+
             .info-item {
-                padding: 15px;
+                width: 280px;
             }
-            
-            section {
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
+
             .scroll-indicator {
-                margin: 10px auto 15px;
-                padding: 8px;
+                max-width: 350px;
+                padding: 12px;
+            }
+
+            .scroll-indicator p {
+                font-size: 1.1rem;
+            }
+
+            .scroll-indicator i {
+                font-size: 2rem;
+            }
+
+            .pix-key-box {
+                font-size: 1.5rem;
             }
         }
 
-        /* Ajustes para telas muito pequenas */
-        @media (max-width: 360px) {
-            .titulo-boteco {
-                font-size: 2rem;
-            }
-            
-            .subtitulo {
-                font-size: 1rem;
-                padding: 5px 12px;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            h2 i {
-                font-size: 1rem;
-            }
-        }
+        /* UTILITÁRIOS */
+        .text-center { text-align: center; }
+        .mt-10 { margin-top: 10px; }
+        .mb-10 { margin-bottom: 10px; }
+        .w-100 { width: 100%; }
     </style>
 </head>
 <body>
-    <div class="pisca-pisca">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
     <!-- Página Principal -->
     <div id="pagina-principal">
         <div class="container">
             <header>
-                <h1 class="titulo-boteco">BOTECO DO<br>CHRISTIAN</h1>
+                <h1 class="titulo-boteco">BOTECO<br>DO CHRISTIAN</h1>
                 <div class="subtitulo">⏤ VAMOS CELEBRAR ⏤</div>
                 
-                <!-- Indicador de rolagem - AGORA LOGO ABAIXO DO VAMOS CELEBRAR -->
+                <!-- Indicador de rolagem -->
                 <div class="scroll-indicator" onclick="document.getElementById('confirmacao').scrollIntoView({behavior: 'smooth'})">
                     <p>⬇️ CONFIRMAR PRESENÇA ⬇️</p>
                     <i class="fas fa-chevron-down"></i>
@@ -511,14 +428,14 @@
                 
                 <!-- Imagem do Christian -->
                 <div class="chris-image-container">
-                    <img src="christian.png" alt="Christian" class="chris-image" onerror="this.src='https://via.placeholder.com/500x500/4a2c1a/d4a76a?text=Christian'">
+                    <img src="christian.png" alt="Christian" class="chris-image" onerror="this.src='https://via.placeholder.com/400x400/4a2c1a/d4a76a?text=Christian'">
                 </div>
             </header>
 
             <section id="sobre">
                 <h2><i class="fas fa-beer"></i> VEM PRO BOTECO! <i class="fas fa-beer"></i></h2>
-                <p style="font-size: clamp(1rem, 4vw, 1.2rem); text-align: center; margin-bottom: 20px;">🎉 O Boteco do Christian vai abrir as portas pra você! 🎉</p>
-                <p style="text-align: center; font-size: clamp(0.9rem, 3.5vw, 1rem);">Uma tarde de muito pagode, cerveja gelada e resenha boa. Traga sua energia e vamos celebrar juntos!</p>
+                <p class="text-center" style="margin-bottom: 15px;">🎉 O Boteco do Christian vai abrir as portas pra você! 🎉</p>
+                <p class="text-center">Uma tarde de muito pagode, cerveja gelada e resenha boa. Traga sua energia!</p>
                 
                 <div class="info-card">
                     <div class="info-item">
@@ -541,17 +458,17 @@
 
             <section id="confirmacao">
                 <h2><i class="fas fa-check-circle"></i> CONFIRMA PRESENÇA <i class="fas fa-check-circle"></i></h2>
-                <p style="text-align: center; margin-bottom: 25px; font-size: clamp(0.9rem, 3.5vw, 1rem);">Confirme até dia 05/03/2026 pra gente preparar o churrasco!</p>
+                <p class="text-center mb-10">Confirme até 05/03/2026 pra gente preparar o churrasco!</p>
                 
                 <form id="confirmacao-form">
                     <div class="form-group">
                         <label for="nome">Seu nome completo *</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                        <input type="text" id="nome" placeholder="Digite seu nome" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="acompanhantes">Número de acompanhantes</label>
-                        <select id="acompanhantes" name="acompanhantes" required>
+                        <label for="acompanhantes">Acompanhantes</label>
+                        <select id="acompanhantes" required>
                             <option value="0">Vou sozinho</option>
                             <option value="1" selected>1 acompanhante</option>
                             <option value="2">2 acompanhantes</option>
@@ -565,73 +482,64 @@
                     
                     <div class="loading" id="loading">
                         <div class="loading-spinner"></div>
-                        <p style="margin-top: 10px;">Enviando confirmação...</p>
+                        <p>Enviando...</p>
                     </div>
                 </form>
                 
-                <div id="error-msg" class="error-message" style="display: none; text-align: center; padding: 15px; background: rgba(255, 0, 0, 0.1); border: 1px solid red; border-radius: 10px; margin-top: 15px;">
-                    <p>Erro ao confirmar. Tenta novamente!</p>
+                <div id="error-msg" style="display: none; background: rgba(255,0,0,0.1); border: 1px solid red; border-radius: 10px; padding: 12px; margin-top: 15px; text-align: center;">
+                    <p>Erro ao confirmar. Tente novamente!</p>
                 </div>
             </section>
 
             <footer>
                 <p>🍻 Boteco do Christian - 2026 🍻</p>
-                <p style="margin-top: 8px; font-size: 0.9rem;">Vai ter música boa, comida e resenha!</p>
+                <p style="margin-top: 5px;">Música boa, comida e resenha!</p>
             </footer>
         </div>
     </div>
 
-    <!-- Página de Confirmação (inicialmente oculta) -->
+    <!-- Página de Confirmação -->
     <div id="pagina-confirmacao" style="display: none;">
         <div class="container">
-            <!-- Cabeçalho da página de confirmação -->
-            <div style="text-align: center; margin-bottom: 30px;">
-                <i class="fas fa-beer" style="font-size: clamp(3rem, 15vw, 5rem); color: var(--amarelo-quente); margin-bottom: 15px;"></i>
-                <h1 style="color: var(--amarelo-quente); font-size: clamp(2rem, 8vw, 2.5rem); margin-bottom: 8px;">TÁ CONFIRMADO!</h1>
-                <p style="font-size: clamp(1rem, 4vw, 1.2rem); color: var(--bege);"><span id="nome-confirmado" style="color: var(--amarelo-quente); font-weight: 600;"></span>, você é nossa estrela!</p>
+            <div class="text-center" style="margin-bottom: 20px;">
+                <i class="fas fa-beer" style="font-size: 3.5rem; color: var(--amarelo-quente);"></i>
+                <h1 style="color: var(--amarelo-quente); font-size: 2rem; margin: 5px 0;">TÁ CONFIRMADO!</h1>
+                <p><span id="nome-confirmado" style="color: var(--amarelo-quente); font-weight: 600;"></span>, você é nossa estrela!</p>
             </div>
 
-            <!-- Área de conteúdo personalizado (só PIX) -->
-            <div id="conteudo-personalizado" style="margin-bottom: 30px;"></div>
+            <!-- Conteúdo PIX -->
+            <div id="conteudo-personalizado" class="pix-card">
+                <h2 style="font-size: 1.8rem; margin-bottom: 10px;">💰 PIX</h2>
+                <p class="text-center">Chave (CPF):</p>
+                <div class="pix-key-box" id="pix-key">82448604304</div>
+                <p class="text-center" style="color: var(--amarelo-quente); font-size: 1.3rem; font-weight: 600;">R$ 150,00</p>
+                <button class="copy-btn" onclick="copiarPix()">
+                    <i class="fas fa-copy"></i> Copiar chave
+                </button>
+                <p class="text-center mt-10" style="color: var(--dourado-cerveja);">Desde já obrigado pelo presente! ❤️</p>
+            </div>
 
             <!-- Localização -->
-            <div style="background: rgba(44, 24, 16, 0.95); border-radius: 25px; padding: 25px; border: 2px solid var(--amarelo-quente);">
-                <h2 style="color: var(--amarelo-quente); margin-bottom: 20px; font-size: clamp(1.5rem, 5vw, 2rem);">📍 ONDE VAI SER</h2>
-                <p style="text-align: center; margin-bottom: 15px; font-size: clamp(1rem, 3.5vw, 1.2rem);">
-                    <i class="fas fa-map-pin" style="color: var(--amarelo-quente); margin-right: 8px;"></i>
-                    Rua Luis Eduardo, 35 - Vila Luizão
-                </p>
-                
-                <div style="position: relative; overflow: hidden; border-radius: 15px; height: 300px; border: 3px solid var(--amarelo-quente); margin-bottom: 15px;">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15944.19849624591!2d-44.21188478432636!3d-2.490524572962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7f6924c5008143b%3A0x4be1788202cdb8a!2sR.%20Lu%C3%ADs%20Eduardo%20-%20Turu%2C%20S%C3%A3o%20Lu%C3%ADs%20-%20MA%2C%2065066-620!5e0!3m2!1spt-BR!2sbr!4v1755606599801!5m2!1spt-BR!2sbr" 
-                        style="width: 100%; height: 100%; border: 0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+            <div class="pix-card">
+                <h2 style="font-size: 1.8rem;">📍 LOCAL</h2>
+                <p class="text-center">Rua Luis Eduardo, 35 - Vila Luizão</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15944.19849624591!2d-44.21188478432636!3d-2.490524572962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7f6924c5008143b%3A0x4be1788202cdb8a!2sR.%20Lu%C3%ADs%20Eduardo%20-%20Turu%2C%20S%C3%A3o%20Lu%C3%ADs%20-%20MA%2C%2065066-620!5e0!3m2!1spt-BR!2sbr!4v1755606599801!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                
-                <div style="text-align: center;">
-                    <a href="https://maps.app.goo.gl/Zj4tjdGyCkUa7cH17" target="_blank" style="display: inline-block; background: linear-gradient(135deg, var(--amarelo-quente), var(--dourado-cerveja)); color: var(--marrom-escuro); padding: 12px 25px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: clamp(0.9rem, 3.5vw, 1rem); width: 100%; max-width: 300px;">
-                        <i class="fas fa-directions"></i> COMO CHEGAR
-                    </a>
-                </div>
+                <a href="https://maps.app.goo.gl/Zj4tjdGyCkUa7cH17" target="_blank" class="copy-btn" style="text-decoration: none; text-align: center; margin-top: 10px;">
+                    <i class="fas fa-directions"></i> Como chegar
+                </a>
             </div>
 
-            <!-- Botão Voltar -->
-            <div style="text-align: center; margin-top: 20px;">
-                <button onclick="voltarInicio()" style="background: transparent; border: 2px solid var(--amarelo-quente); color: var(--amarelo-quente); padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; width: 100%; max-width: 300px; font-size: clamp(0.9rem, 3.5vw, 1rem);">
-                    <i class="fas fa-arrow-left"></i> Voltar ao boteco
-                </button>
-            </div>
+            <button class="back-btn" onclick="voltarInicio()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
         </div>
     </div>
 
     <script>
-        // URL do Google Apps Script
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXFuEY2t2m7j4NRUV9YFCqXZexgAzODtqVd70-2aj4Krh3kXGrMvg_EPT0qJicAoXs5g/exec';
         
-        // Elementos
         const form = document.getElementById('confirmacao-form');
         const loading = document.getElementById('loading');
         const submitBtn = document.getElementById('submit-btn');
@@ -639,72 +547,25 @@
         const paginaPrincipal = document.getElementById('pagina-principal');
         const paginaConfirmacao = document.getElementById('pagina-confirmacao');
         const nomeConfirmado = document.getElementById('nome-confirmado');
-        const conteudoPersonalizado = document.getElementById('conteudo-personalizado');
 
-        // Template do PIX (única opção)
-        function criarTemplatePix(nome) {
-            return `
-                <div style="background: rgba(44, 24, 16, 0.95); border-radius: 25px; padding: 25px; border: 2px solid var(--amarelo-quente);">
-                    <h2 style="color: var(--amarelo-quente); margin-bottom: 20px; font-size: clamp(1.5rem, 5vw, 2rem);">💰 PRESENTE VIA PIX</h2>
-                    <p style="text-align: center; margin-bottom: 20px; font-size: clamp(0.95rem, 3.5vw, 1.1rem);">${nome}, use a chave abaixo para fazer o PIX de <span style="color: var(--amarelo-quente); font-weight: 800; font-size: clamp(1.2rem, 4vw, 1.5rem);">R$ 150,00</span>:</p>
-                    
-                    <div class="pix-container">
-                        <div style="background: linear-gradient(135deg, var(--marrom), var(--marrom-escuro)); border-radius: 20px; padding: 20px; border: 1px solid var(--amarelo-quente);">
-                            <p style="text-align: center; margin-bottom: 12px; font-weight: 600; color: var(--dourado-cerveja); font-size: clamp(0.9rem, 3.5vw, 1rem);">Chave PIX (CPF):</p>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                                <div class="pix-key-box">
-                                    82448604304
-                                </div>
-                                <button onclick="copiarPix()" class="copy-btn-mobile" style="background: linear-gradient(135deg, var(--amarelo-quente), var(--dourado-cerveja)); color: var(--marrom-escuro); border: none; padding: 15px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; max-width: 250px;">
-                                    <i class="fas fa-copy"></i> Copiar chave
-                                </button>
-                            </div>
-                            
-                            <div style="text-align: center; margin-top: 15px;">
-                                <p style="color: var(--amarelo-quente); font-size: clamp(1rem, 4vw, 1.2rem);">Valor: <strong>R$ 150,00</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 20px; color: var(--dourado-cerveja); font-size: clamp(0.9rem, 3.5vw, 1rem);">
-                        <i class="fas fa-heart" style="color: var(--amarelo-quente);"></i> Desde já obrigado pelo presente! 
-                        <i class="fas fa-heart" style="color: var(--amarelo-quente);"></i>
-                    </p>
-                </div>
-            `;
+        function copiarPix() {
+            navigator.clipboard.writeText('82448604304').then(() => {
+                alert('✅ Chave PIX copiada! Valor: R$ 150,00');
+            });
         }
 
-        // Função para copiar PIX
-        window.copiarPix = function() {
-            const pixKey = '82448604304';
-            navigator.clipboard.writeText(pixKey).then(() => {
-                alert('✅ Chave PIX copiada! Agora é só fazer a transferência de R$ 150,00!');
-            }).catch(err => {
-                console.error('Erro ao copiar:', err);
-                alert('❌ Erro ao copiar. Tenta de novo!');
-            });
-        };
-
-        // Função para voltar ao início
         window.voltarInicio = function() {
             paginaConfirmacao.style.display = 'none';
             paginaPrincipal.style.display = 'block';
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo(0, 0);
         };
 
-        // Enviar dados para o Google Sheets
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const nome = document.getElementById('nome').value.trim();
-            const acompanhantes = document.getElementById('acompanhantes').value;
-            
             if (!nome) {
-                alert('Por favor, digita seu nome!');
+                alert('Digite seu nome!');
                 return;
             }
             
@@ -715,52 +576,28 @@
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
                     body: new URLSearchParams({
                         'Nome': nome,
-                        'Acompanhantes': acompanhantes,
+                        'Acompanhantes': document.getElementById('acompanhantes').value,
                         'Tipo': 'PIX R$ 150,00',
                         'Data': new Date().toLocaleString('pt-BR')
                     })
                 });
                 
-                // Esconde a página principal e mostra a página de confirmação
                 paginaPrincipal.style.display = 'none';
                 paginaConfirmacao.style.display = 'block';
-                
-                // Atualiza o nome na página de confirmação
                 nomeConfirmado.textContent = nome;
-                
-                // Gera o conteúdo do PIX
-                conteudoPersonalizado.innerHTML = criarTemplatePix(nome);
-                
-                // Garante que a página comece do TOPO
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'instant'
-                });
-                
-                // Limpa o formulário
+                window.scrollTo(0, 0);
                 form.reset();
                 
             } catch (error) {
-                console.error('Erro:', error);
                 errorMsg.style.display = 'block';
-                setTimeout(() => {
-                    errorMsg.style.display = 'none';
-                }, 3000);
+                setTimeout(() => errorMsg.style.display = 'none', 3000);
             } finally {
                 loading.classList.remove('mostrar');
                 submitBtn.disabled = false;
             }
         });
-
-        // Detectar se é mobile para ajustar mensagens
-        if (window.innerWidth <= 768) {
-            console.log('Modo mobile ativado');
-        }
     </script>
 </body>
 </html>
